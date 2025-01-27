@@ -10,6 +10,10 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
+    gurdian_info:{
+        type: String,
+        required: true,
+    },
     password:{
         type: String,
         required: true,

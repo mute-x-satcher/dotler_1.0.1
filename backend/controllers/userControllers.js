@@ -3,9 +3,9 @@ const User = require('../models/userModel');
 const genrateToken = require('../config/genrateToken');
 const registerUser = asyncHandler(async (req,res)=>{
 
-        const {name,email,password} = req.body;
+        const {name,email,password,gurdian_info} = req.body;
 
-        if(!name || !email || !password){
+        if(!name || !email || !password || !gurdian_info){
             res.status(400);
             throw new Error('Please fill all fileds');
         }
@@ -20,6 +20,7 @@ const registerUser = asyncHandler(async (req,res)=>{
        const user = await User.create({
         name,
         email,
+        gurdian_info,
         password,
        });
 
@@ -27,6 +28,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         res.status(201).json({
             _id: user._id,
             name: user.name,
+            gurdian_info: user.gurdian_info,
             email: user.email,
             password: user.password,
             token:genrateToken(user._id),
@@ -46,6 +48,7 @@ const authUser = asyncHandler(async(req,res)=>{
             res.status(201).json({
                 _id: user._id,
                 name: user.name,
+                gurdian_info: user.gurdian_info,
                 email: user.email,
                 password: user.password,
                 token:genrateToken(user._id),

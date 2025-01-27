@@ -14,6 +14,7 @@ const Signup = () => {
   const history = useHistory();
 
   const [name, setName] = useState();
+  const [gurdian_info,setGurdian_info] = useState();
   const [email, setEmail] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
@@ -22,7 +23,7 @@ const Signup = () => {
 
   const submitHandler = async () => {
     setPicLoading(true);
-    if (!name || !email || !password || !confirmpassword) {
+    if (!name || !email || !password || !confirmpassword || !gurdian_info) {
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
@@ -43,7 +44,7 @@ const Signup = () => {
       });
       return;
     }
-    console.log(name, email, password, pic);
+    console.log(name,gurdian_info,email, password, pic);
     try {
       const config = {
         headers: {
@@ -56,6 +57,7 @@ const Signup = () => {
           name,
           email,
           password,
+          gurdian_info,
           pic,
         },
         config
@@ -136,6 +138,13 @@ const Signup = () => {
         <Input
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
+        />
+      </FormControl>
+      <FormControl id="gurdian-info" isRequired>
+        <FormLabel>Gurdian Name</FormLabel>
+        <Input
+          placeholder="Enter Gurdian Name"
+          onChange={(e) => setGurdian_info(e.target.value)}
         />
       </FormControl>
       <FormControl id="email" isRequired>
